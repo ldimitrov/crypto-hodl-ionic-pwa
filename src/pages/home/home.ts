@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, ItemSliding, AlertController } from 'ionic-angular';
+import { NavController, IonicPage, AlertController } from 'ionic-angular';
 import { HodlingsProvider } from '../../providers/hodlings/hodlings';
 
 @IonicPage()
