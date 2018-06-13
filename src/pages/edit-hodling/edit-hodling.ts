@@ -40,7 +40,7 @@ export class EditHodlingPage {
 
       if (result.success) {
         this.hodlingsProvider.editHodling(this.hodling);
-        this.navCtrl.pop();
+        this.navCtrl.popToRoot();
       } else {
         this.cryptoUnavailable = true;
       }

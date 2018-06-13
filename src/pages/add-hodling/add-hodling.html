@@ -17,8 +17,12 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Fiat Currency</ion-label>
-      <ion-input [(ngModel)]="fiatCurrency" placeholder="(e.g. USD, EUR, JPY)" type="text"></ion-input>
+      <ion-label>Fiat Currency</ion-label>
+      <ion-select [(ngModel)]="fiatCurrency" interface="popover">
+        <ion-option>EUR</ion-option>
+        <ion-option>USD</ion-option>
+        <ion-option>JPY</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
@@ -37,5 +41,6 @@
 </ion-content>
 
 <ion-footer padding>
-    <p><strong>Note:</strong> Prices are fetched from Cryptonator's API and may vary accross exchanges</p>
+  <p>
+    <strong>Note:</strong> Prices are fetched from Cryptonator's API and may vary accross exchanges</p>
 </ion-footer>
