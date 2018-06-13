@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Edit HODLing</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Crypto Ticker</ion-label>
+      <ion-input [(ngModel)]="hodling.crypto" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Fiat Currency</ion-label>
+      <ion-input [(ngModel)]="hodling.currency" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Amount HODLing</ion-label>
+      <ion-input [(ngModel)]="hodling.amount" type="number"></ion-input>
+    </ion-item>
+
+    <button ion-button full (click)="saveEdits()" [disabled]="checkingValidity">Save
+      <ion-spinner *ngIf="checkingValidity"></ion-spinner>
+    </button>
+
+    <p class="error-message" *ngIf="cryptoUnavailable">The combination you provided is invalid.</p>
+
+  </ion-list>
+
+</ion-content>
+<ion-footer padding>
+
+    <p><strong>Note:</strong> Prices are fetched from Cryptonator's API</p>
+
+</ion-footer>

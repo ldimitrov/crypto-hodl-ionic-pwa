@@ -26,6 +26,13 @@ export class HodlingsProvider {
     this.saveHodlings();
   }
 
+  editHodling(hodling: Hodling) {
+    let index = this.hodlings.indexOf(hodling);
+    this.hodlings[index] = hodling;
+    this.fetchPrices();
+    this.saveHodlings();
+  }
+
   removeHodling(hodling): void {
     this.hodlings.splice(this.hodlings.indexOf(hodling), 1);
     this.fetchPrices();

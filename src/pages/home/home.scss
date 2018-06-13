@@ -11,14 +11,12 @@ page-home {
   }
 
   .holding {
-
       background-color: #f9f9f9;
       text-transform: uppercase;
 
       .amount {
           font-size: 0.7em;
       }
-
   }
 
   .value {
@@ -26,5 +24,4 @@ page-home {
       font-size: 1.2em;
       color: map-get($colors, secondary);
   }
-
 }
