@@ -22,31 +22,8 @@ export class HomePage {
 
   editHodling(hodling): void {
     this.navCtrl.push('EditHodlingPage', {
-        param: hodling
+      param: hodling
     });
-}
-
-  removeHodling(hodling, slidingItem: ItemSliding): void {
-    let alert = this.alertCtrl.create({
-      title: 'Are you sure?',
-      message: 'Do you want to remove this HODLing?',
-      buttons: [
-        {
-          text: 'No',
-          role: 'cancel',
-          handler: () => {
-            slidingItem.close();
-          }
-        },
-        {
-          text: 'Remove',
-          handler: () => {
-            this.hodlingsProvider.removeHodling(hodling);
-          }
-        }
-      ]
-    });
-    alert.present();
   }
 
   goToCryptonator(): void {

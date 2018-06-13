@@ -4,7 +4,6 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
 
   <ion-list>
@@ -24,17 +23,26 @@
       <ion-input [(ngModel)]="hodling.amount" type="number"></ion-input>
     </ion-item>
 
-    <button ion-button full (click)="saveEdits()" [disabled]="checkingValidity">Save
-      <ion-spinner *ngIf="checkingValidity"></ion-spinner>
-    </button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button full (click)="saveEdits()" [disabled]="checkingValidity">Save
+            <ion-spinner *ngIf="checkingValidity"></ion-spinner>
+          </button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button full color="secondary" (click)="removeHodling(hodling)">Remove
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
     <p class="error-message" *ngIf="cryptoUnavailable">The combination you provided is invalid.</p>
+    <p class="error-message" *ngIf="noConnection">You need to be online to update an existing HODLing.</p>
 
   </ion-list>
 
 </ion-content>
 <ion-footer padding>
-
-    <p><strong>Note:</strong> Prices are fetched from Cryptonator's API</p>
-
+  <p><strong>Note:</strong> Prices are fetched from Cryptonator's API and may vary accross exchanges</p>
 </ion-footer>

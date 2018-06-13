@@ -12,15 +12,10 @@
 </ion-header>
 
 <ion-content>
-
   <div class="message" *ngIf="!hodlingsProvider.hodlings.length">
     <p>
-      <strong>P</strong>rogressive
-      <strong>W</strong>eb
-      <strong>A</strong>pplication to keep track of your HODL portfolio.</p>
-
+      <strong>Progressive Web Application</strong> to keep track of your HODL portfolio.</p>
     <button ion-button full (click)="addHodling()" color="primary">Add Coins</button>
-
   </div>
 
   <ion-refresher *ngIf="hodlingsProvider.hodlings.length" (ionRefresh)="refreshPrices($event)">
@@ -28,36 +23,27 @@
   </ion-refresher>
 
   <p class="message" *ngIf="hodlingsProvider.pricesUnavailable">Could not fetch prices. Make sure you are connected to the Internet or try again later.</p>
-  <ion-list no-lines>
+  <ion-list no-lines *ngFor="let hodling of hodlingsProvider.hodlings">
 
-    <ion-item-sliding *ngFor="let hodling of hodlingsProvider.hodlings" #slidingItem>
-
-      <ion-item class="hodling" (click)="editHodling(hodling)">
-        <p>
-          <strong>{{hodling.crypto}}/{{hodling.currency}}</strong>
-        </p>
+    <ion-card class="hodling" (click)="editHodling(hodling)">
+      <ion-card-header>
+        <strong>{{hodling.crypto}}/{{hodling.currency}}</strong>
+      </ion-card-header>
+      <ion-card-content>
         <p class="amount">
+          <strong>Current Price:</strong> {{hodling.value | currency}}
+        </p>
+        <p>
           <strong>Coins:</strong> {{hodling.amount}}
-          <strong>Value:</strong> {{hodling.value | currency}}</p>
+        </p>
         <p *ngIf="hodling.value > 0" class="value">{{hodling.amount * hodling.value | currency}}</p>
-        <hr/>
-      </ion-item>
-
-      <ion-item-options>
-        <button ion-button icon-only color="danger" (click)="removeHodling(hodling, slidingItem)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
-      </ion-item-options>
-
-    </ion-item-sliding>
+      </ion-card-content>
+    </ion-card>
 
   </ion-list>
 
 </ion-content>
 
 <ion-footer padding>
-
-  <p>
-    <strong>Note:</strong> Prices are fetched from Cryptonator's API</p>
-
+  <p><strong>Note:</strong> Prices are fetched from Cryptonator's API and may vary accross exchanges</p>
 </ion-footer>
