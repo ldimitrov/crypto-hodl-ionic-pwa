@@ -27,6 +27,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <p class="message" *ngIf="hodlingsProvider.pricesUnavailable">Could not fetch prices. Make sure you are connected to the Internet or try again later.</p>
   <ion-list no-lines>
 
     <ion-item-sliding *ngFor="let hodling of hodlingsProvider.hodlings" #slidingItem>

@@ -33,10 +33,12 @@
   </button>
 
   <p class="error-message" *ngIf="cryptoUnavailable">The combination you provided is invalid.</p>
+  <p class="error-message" *ngIf="noConnection">You need to be online to add a new HODLing.</p>
 </ion-content>
 
 <ion-footer padding>
 
-    <p><strong>Note:</strong> Prices are fetched from Cryptonator's API</p>
+  <p>
+    <strong>Note:</strong> Prices are fetched from Cryptonator's API</p>
 
 </ion-footer>

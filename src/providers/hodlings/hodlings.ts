@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { timeoutWith } from 'rxjs/operators';
+import 'rxjs/add/observable/throw';
 
 interface Hodling {
   crypto: string,
@@ -16,6 +18,7 @@ const API_BASE_URL = 'https://api.cryptonator.com/api/ticker/';
 export class HodlingsProvider {
 
   public hodlings: Hodling[] = [];
+  public pricesUnavailable: boolean = false;
 
   constructor(public http: HttpClient, private storage: Storage) {
   }
@@ -53,7 +56,9 @@ export class HodlingsProvider {
   }
 
   verifyHodling(hodling): Observable<any> {
-    return this.http.get(API_BASE_URL + hodling.crypto + '-' + hodling.currency);
+    return this.http.get(API_BASE_URL + hodling.crypto + '-' + hodling.currency).pipe(
+      timeoutWith(5000, Observable.throw(new Error('Failed to verify HODLing.')))
+    );
   }
 
   fetchPrices(refresher?): void {
@@ -63,7 +68,9 @@ export class HodlingsProvider {
       requests.push(request);
     }
 
-    forkJoin(requests).subscribe(results => {
+    forkJoin(requests).pipe(
+      timeoutWith(5000, Observable.throw(new Error('Failed to fetch prices.')))
+    ).subscribe(results => {
       results.forEach((result: any, index) => {
         this.hodlings[index].value = result.ticker.price;
       });
