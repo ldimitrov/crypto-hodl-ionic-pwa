@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Add HODLing</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="message">
+    <p>Please provide the crypto ticker and the desired fiat currency.</p>
+  </div>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Crypto Ticker</ion-label>
+      <ion-input [(ngModel)]="cryptoTicker" placeholder="(e.g. BTC, LTC, ETH)" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Fiat Currency</ion-label>
+      <ion-input [(ngModel)]="fiatCurrency" placeholder="(e.g. USD, EUR, JPY)" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Amount HODLing</ion-label>
+      <ion-input [(ngModel)]="amountHodling" type="number"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button full (click)="addHodling()" [disabled]="checkingValidity">Add HODLing
+    <ion-spinner *ngIf="checkingValidity"></ion-spinner>
+  </button>
+
+  <p class="error-message" *ngIf="cryptoUnavailable">The combination you provided is invalid.</p>
+</ion-content>
+
+<ion-footer padding>
+
+  <p>footer</p>
+
+</ion-footer>

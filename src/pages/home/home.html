@@ -1,14 +1,56 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      Ionic Blank
+      Crypto HODLings
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addHodling()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+  <div class="message" *ngIf="!hodlingsProvider.hodlings.length">
+    <p>
+      <strong>P</strong>rogressive
+      <strong>W</strong>eb
+      <strong>A</strong>pplication to keep track of your HODL portfolio.</p>
+
+    <button ion-button full (click)="addHodling()" color="primary">Add Coins</button>
+
+  </div>
+
+  <ion-refresher *ngIf="hodlingsProvider.hodlings.length" (ionRefresh)="refreshPrices($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list no-lines>
+
+    <ion-item-sliding *ngFor="let hodling of hodlingsProvider.hodlings" #slidingItem>
+
+      <ion-item class="hodling">
+        <p>
+          <strong>{{hodling.crypto}}/{{hodling.currency}}</strong>
+        </p>
+        <p class="amount">
+          <strong>Coins:</strong> {{hodling.amount}}
+          <strong>Value:</strong> {{hodling.value | currency}}</p>
+        <p *ngIf="hodling.value > 0" class="value">{{hodling.amount * hodling.value | currency}}</p>
+      </ion-item>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
 </ion-content>
+
+<ion-footer padding>
+
+  <p>
+    footer
+  </p>
+
+</ion-footer>
